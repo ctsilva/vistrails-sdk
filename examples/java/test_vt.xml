@@ -1,0 +1,99 @@
+<!--
+-- Copyright (c) 2009-2011 VisTrails, Inc..
+--
+-- This file is part of VisTrails SDK
+-- (see https://github.com/vistrails/sdk).
+--
+-- License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
+  -->
+<vistrail numVersions="4">
+    <versions>
+        <version type="dict">
+            <id type="string">ac0cb64f-b1d1-4a31-8935-37e0cb73fbea</id>
+            <actions type="dict">
+                <checkpoint type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <classname type="string">Oval</classname>
+                        <data type="list">
+                            <_float type="float">0</_float>
+                        </data>
+                    </_dict>
+                </performed>
+                <inverse type="list" />
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-10-28 01:13:47</date>
+                <user type="string">info@vistrails.com</user>
+            </stamp>
+            <annotations type="dict" />
+            <parent type="string">370c4f4e-d5e7-4dbc-bfd5-20dc083e919f</parent>
+        </version>
+        <version type="dict">
+            <id type="string">ffedf076-9a0b-497c-a178-f27f535e50d1</id>
+            <actions type="dict">
+                <checkpoint type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <classname type="string">Rect</classname>
+                        <data type="list">
+                            <_float type="float">0</_float>
+                            <_float type="float">0</_float>
+                        </data>
+                    </_dict>
+                </performed>
+                <inverse type="list" />
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-10-28 01:13:47</date>
+                <user type="string">info@vistrails.com</user>
+            </stamp>
+            <annotations type="dict" />
+            <parent type="string">370c4f4e-d5e7-4dbc-bfd5-20dc083e919f</parent>
+        </version>
+        <version type="dict">
+            <id type="string">370c4f4e-d5e7-4dbc-bfd5-20dc083e919f</id>
+            <actions type="dict">
+                <checkpoint type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <classname type="string">Oval</classname>
+                        <data type="list">
+                            <_float type="float">0</_float>
+                        </data>
+                    </_dict>
+                </performed>
+                <inverse type="list" />
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-10-28 01:13:47</date>
+                <user type="string">info@vistrails.com</user>
+            </stamp>
+            <annotations type="dict" />
+            <parent type="string">00000000-0000-0000-0000-000000000000</parent>
+        </version>
+        <version type="dict">
+            <id type="string">a6dec7c3-8a38-47b0-82e0-3a3dc0875d79</id>
+            <actions type="dict">
+                <checkpoint type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <classname type="string">Rect</classname>
+                        <data type="list">
+                            <_float type="float">0</_float>
+                            <_float type="float">0</_float>
+                        </data>
+                    </_dict>
+                </performed>
+                <inverse type="list" />
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-10-28 01:13:47</date>
+                <user type="string">info@vistrails.com</user>
+            </stamp>
+            <annotations type="dict" />
+            <parent type="string">ac0cb64f-b1d1-4a31-8935-37e0cb73fbea</parent>
+        </version>
+    </versions>
+    <annotations type="dict" />
+</vistrail>

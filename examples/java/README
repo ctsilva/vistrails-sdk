@@ -1,0 +1,13 @@
+You must build the SDK with Java Wrapping enabled to run this.
+
+Build and run this with the swig classes in your classpath and the
+libs on your library paths.  For example,
+
+javac -classpath .:../capi/src/build/swig *.java
+DYLD_LIBRARY_PATH=../capi/src/build/swig java -classpath .:../capi/src/build/swig Testing
+
+
+Windows Example:
+ - copy JavaVisTrails.dll and VisTrails.dll into this directory
+ - javac -cp .;..\build\capi\src\swig *.java
+ - java -cp .;..\build\capi\src\swig Testing

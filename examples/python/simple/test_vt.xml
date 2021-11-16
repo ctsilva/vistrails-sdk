@@ -1,0 +1,59 @@
+<!--
+-- Copyright (c) 2009-2011 VisTrails, Inc..
+--
+-- This file is part of VisTrails SDK
+-- (see https://github.com/vistrails/sdk).
+--
+-- License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
+  -->
+<vistrail numVersions="2">
+    <versions>
+        <version type="dict">
+            <actions type="dict">
+                <checkpoint type="list" />
+                <inverse type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <data type="list">
+                            <_float type="float">5</_float>
+                        </data>
+                        <classname type="string">com.vistrails.example.OvalAction</classname>
+                    </_dict>
+                    <_dict type="dict">
+                        <data type="list">
+                            <_float type="float">3</_float>
+                            <_float type="float">4</_float>
+                        </data>
+                        <classname type="string">com.vistrails.example.RectAction</classname>
+                    </_dict>
+                    <_dict type="dict">
+                        <data type="list">
+                            <_float type="float">8</_float>
+                        </data>
+                        <classname type="string">com.vistrails.example.OvalAction</classname>
+                    </_dict>
+                </performed>
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2012-07-23 22:55:24</date>
+            </stamp>
+            <parent type="string">00000000-0000-0000-0000-000000000000</parent>
+            <annotations type="dict" />
+            <id type="string">5e317de8-197c-4c06-9c1a-f0b2a4b08c6e</id>
+        </version>
+        <version type="dict">
+            <actions type="dict">
+                <checkpoint type="list" />
+                <inverse type="list" />
+                <performed type="list" />
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2012-07-23 22:55:24</date>
+            </stamp>
+            <parent type="string">5e317de8-197c-4c06-9c1a-f0b2a4b08c6e</parent>
+            <annotations type="dict" />
+            <id type="string">bbcca590-c622-4dfd-98cb-3a0552b64935</id>
+        </version>
+    </versions>
+    <annotations type="dict" />
+</vistrail>

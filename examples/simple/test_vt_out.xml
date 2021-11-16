@@ -1,0 +1,111 @@
+<!--
+-- Copyright (c) 2009-2011 VisTrails, Inc..
+--
+-- This file is part of VisTrails SDK
+-- (see https://github.com/vistrails/sdk).
+--
+-- License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
+  -->
+<vistrail numVersions="4">
+    <versions>
+        <version type="dict">
+            <actions type="dict">
+                <checkpoint type="list" />
+                <inverse type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <data type="list">
+                            <_float type="float">8</_float>
+                        </data>
+                        <classname type="string">Oval</classname>
+                    </_dict>
+                </performed>
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-09-10 00:12:42</date>
+            </stamp>
+            <parent type="string">1933c728-75d2-451c-863f-e8732cbb62f4</parent>
+            <annotations type="dict" />
+            <id type="string">8a3bbf44-ae8b-4c5f-8d8d-5739f9041cca</id>
+        </version>
+        <version type="dict">
+            <actions type="dict">
+                <checkpoint type="list" />
+                <inverse type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <data type="list">
+                            <_float type="float">5</_float>
+                        </data>
+                        <classname type="string">Oval</classname>
+                    </_dict>
+                    <_dict type="dict">
+                        <data type="list">
+                            <_dict type="dict">
+                                <width type="float">3</width>
+                                <height type="float">4</height>
+                            </_dict>
+                        </data>
+                        <classname type="string">Rectangle</classname>
+                    </_dict>
+                </performed>
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-09-14 21:23:18</date>
+            </stamp>
+            <parent type="string">00000000-0000-0000-0000-000000000000</parent>
+            <annotations type="dict" />
+            <id type="string">7908bcbf-e26b-430b-82bb-eca577ecbc6e</id>
+        </version>
+        <version type="dict">
+            <actions type="dict">
+                <checkpoint type="list" />
+                <inverse type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <data type="list">
+                            <_float type="float">8</_float>
+                        </data>
+                        <classname type="string">Oval</classname>
+                    </_dict>
+                </performed>
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-09-14 21:23:18</date>
+            </stamp>
+            <parent type="string">7908bcbf-e26b-430b-82bb-eca577ecbc6e</parent>
+            <annotations type="dict" />
+            <id type="string">1faa9f2e-0916-4027-8f6b-b6c2071468e4</id>
+        </version>
+        <version type="dict">
+            <actions type="dict">
+                <checkpoint type="list" />
+                <inverse type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <data type="list">
+                            <_float type="float">5</_float>
+                        </data>
+                        <classname type="string">Oval</classname>
+                    </_dict>
+                    <_dict type="dict">
+                        <data type="list">
+                            <_dict type="dict">
+                                <width type="float">3</width>
+                                <height type="float">4</height>
+                            </_dict>
+                        </data>
+                        <classname type="string">Rectangle</classname>
+                    </_dict>
+                </performed>
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-09-10 00:12:42</date>
+            </stamp>
+            <parent type="string">00000000-0000-0000-0000-000000000000</parent>
+            <annotations type="dict" />
+            <id type="string">1933c728-75d2-451c-863f-e8732cbb62f4</id>
+        </version>
+    </versions>
+    <annotations type="dict" />
+</vistrail>

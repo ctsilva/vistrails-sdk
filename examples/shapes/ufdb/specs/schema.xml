@@ -1,0 +1,171 @@
+<!--
+-- Copyright (c) 2009-2011 VisTrails, Inc..
+--
+-- This file is part of VisTrails SDK
+-- (see https://github.com/vistrails/sdk).
+--
+-- License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
+  -->
+<objects>
+
+  <!--++++++++++++++++++++++++++-->
+  <!-- ADD_ACTION ++++++++++++++-->
+  <!--++++++++++++++++++++++++++-->
+
+  <object name="add_action">
+    <layout>
+      <xml name="addAction" nodeType="xs:element"/>
+      <sql table="add_action"/>
+    </layout>
+
+    <property name="itemId" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+
+    <property name="itemType" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+
+    <property name="posX" type="float">
+      <xml nodeType="xs:attribute" type="xs:float"/>
+      <sql type="decimal(18,12)"/>
+    </property>
+
+    <property name="posY" type="float">
+      <xml nodeType="xs:attribute" type="xs:float"/>
+      <sql type="decimal(18,12)"/>
+    </property>
+
+    <property name="r" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+
+    <property name="g" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+
+    <property name="b" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+  </object>
+
+  <!--++++++++++++++++++++++++++-->
+  <!-- MOVE_ACTION +++++++++++++-->
+  <!--++++++++++++++++++++++++++-->
+
+  <object name="move_action">
+    <layout>
+      <xml name="moveAction" nodeType="xs:element"/>
+      <sql table="move_action"/>
+    </layout>
+
+    <property name="itemId" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+
+    <property name="oldPosX" type="float">
+      <xml nodeType="xs:attribute" type="xs:float"/>
+      <sql type="decimal(18,12)"/>
+    </property>
+
+    <property name="oldPosY" type="float">
+      <xml nodeType="xs:attribute" type="xs:float"/>
+      <sql type="decimal(18,12)"/>
+    </property>
+
+    <property name="newPosX" type="float">
+      <xml nodeType="xs:attribute" type="xs:float"/>
+      <sql type="decimal(18,12)"/>
+    </property>
+
+    <property name="newPosY" type="float">
+      <xml nodeType="xs:attribute" type="xs:float"/>
+      <sql type="decimal(18,12)"/>
+    </property>
+  </object>
+
+  <!--++++++++++++++++++++++++++-->
+  <!-- DELETE_ACTION +++++++++++-->
+  <!--++++++++++++++++++++++++++-->
+
+  <object name="delete_action">
+    <layout>
+      <xml name="deleteAction" nodeType="xs:element"/>
+      <sql table="delete_action"/>
+    </layout>
+
+    <property name="itemId" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+  </object>
+
+  <!--++++++++++++++++++++++++++-->
+  <!-- SHAPE +++++++++++++++++++-->
+  <!--++++++++++++++++++++++++++-->
+
+  <object name="shape">
+    <layout>
+      <xml name="shape" nodeType="xs:element"/>
+      <sql table="shape"/>
+    </layout>
+
+    <property name="itemId" type="int" primaryKey="true">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+
+    <property name="itemType" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+
+    <property name="posX" type="float">
+      <xml nodeType="xs:attribute" type="xs:float"/>
+      <sql type="decimal(18,12)"/>
+    </property>
+
+    <property name="posY" type="float">
+      <xml nodeType="xs:attribute" type="xs:float"/>
+      <sql type="decimal(18,12)"/>
+    </property>
+
+    <property name="r" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+
+    <property name="g" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+
+    <property name="b" type="int">
+      <xml nodeType="xs:attribute" type="xs:int"/>
+      <sql type="int"/>
+    </property>
+  </object>
+
+  <!--++++++++++++++++++++++++++-->
+  <!-- SCENE_ACTION ++++++++++++-->
+  <!--++++++++++++++++++++++++++-->
+
+  <object name="scene_action">
+    <layout>
+      <xml name="sceneAction" nodeType="xs:element"/>
+      <sql table="scene_action"/>
+    </layout>
+
+    <property ref="true" object="shape" type="object" mapping="one-to-many">
+      <xml nodeType="xs:element"/>
+    </property>
+  </object>
+
+</objects>
+

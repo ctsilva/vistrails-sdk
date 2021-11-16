@@ -1,0 +1,6 @@
+You must build the SDK with Python Wrapping enabled to run this.
+
+Run this with the swig library in your PYTHONPATH and the libs on your
+library paths.  For example,
+
+PYTHONPATH=../capi/src/build/swig python testing.py

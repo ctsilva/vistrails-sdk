@@ -1,0 +1,26 @@
+<!--
+-- Copyright (c) 2009-2011 VisTrails, Inc..
+--
+-- This file is part of VisTrails SDK
+-- (see https://github.com/vistrails/sdk).
+--
+-- License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
+  -->
+<vistrail version="1.0.2" name="">
+    <action id="7573df82-a5e7-4d5a-a3a4-8bbd4166fcad" prevId="00000000-0000-0000-0000-000000000000" date="2010-08-13 16:05:47" session="0" user="dakoop">
+        <data id="a3d635dc-49f8-4a22-9afd-b73232844fd4" type="com.vistrails.provexp.example.ovalaction">
+            <stream id="0ada8a19-1519-457b-9b6e-0c54a907e53b" name="default" serialization="com.vistrails.provexp.tinyxml" inlined="1">
+                <oval />
+            </stream>
+        </data>
+    </action>
+    <action id="da760104-3c84-4e4f-8bdd-52e9ef598247" prevId="00000000-0000-0000-0000-000000000000" date="2010-08-13 16:05:55" session="0" user="dakoop">
+        <data id="da760104-3c84-4e4f-8bdd-52e9ef598247" type="com.vistrails.provexp.example.rectaction">
+            <stream id="d81eec59-768a-44d9-8102-22383ffe7823" name="default" serialization="com.vistrails.provexp.tinyxml" inlined="1" fileRef="">
+                <rect />
+            </stream>
+        </data>
+    </action>
+    <actionAnnotation id="189b9e93-f943-4352-b615-f3073a65ebef" key="__tag__" value="test" actionId="da760104-3c84-4e4f-8bdd-52e9ef598247" date="2010-08-13 16:05:58" user="dakoop" />
+    <actionAnnotation id="a8a18acd-cae6-42fd-acff-950112d217b6" key="__notes__" value='&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&#x0A;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;&#x0A;p, li { white-space: pre-wrap; }&#x0A;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Lucida Grande&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;&#x0A;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;there are some notes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;' actionId="da760104-3c84-4e4f-8bdd-52e9ef598247" date="2010-08-13 16:06:05" user="dakoop" />
+</vistrail>

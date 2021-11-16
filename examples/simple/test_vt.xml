@@ -1,0 +1,129 @@
+<!--
+-- Copyright (c) 2009-2011 VisTrails, Inc..
+--
+-- This file is part of VisTrails SDK
+-- (see https://github.com/vistrails/sdk).
+--
+-- License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
+  -->
+<vistrail numVersions="4">
+    <versions>
+        <version type="dict">
+            <id type="string">b19e2bec-a1f2-406c-b9ad-751f19f285a3</id>
+            <actions type="dict">
+                <checkpoint type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <classname type="string">Oval</classname>
+                        <data type="list">
+                            <_float type="float">5</_float>
+                        </data>
+                    </_dict>
+                    <_dict type="dict">
+                        <classname type="string">Rectangle</classname>
+                        <data type="list">
+                            <_dict type="dict">
+                                <height type="float">4</height>
+                                <width type="float">3</width>
+                            </_dict>
+                        </data>
+                    </_dict>
+                    <_dict type="dict">
+                        <classname type="string">TestAction</classname>
+                        <data type="list">
+                            <_bool type="bool">1</_bool>
+                            <_datetime type="datetime">2011-09-23 01:25:18</_datetime>
+                            <_double type="double">0.32140000000000002</_double>
+                            <_float type="float">56.1230011</_float>
+                            <_int type="int">6516</_int>
+                            <_int64 type="int64">654613231</_int64>
+                            <_string type="string">a;lskdjf</_string>
+                            <_dict type="dict">
+                                <bool type="bool">1</bool>
+                            </_dict>
+                            <_list type="list">
+                                <_bool type="bool">1</_bool>
+                            </_list>
+                        </data>
+                    </_dict>
+                </performed>
+                <inverse type="list" />
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-09-23 01:25:18</date>
+            </stamp>
+            <annotations type="dict" />
+            <parent type="string">00000000-0000-0000-0000-000000000000</parent>
+        </version>
+        <version type="dict">
+            <id type="string">8a3bbf44-ae8b-4c5f-8d8d-5739f9041cca</id>
+            <actions type="dict">
+                <checkpoint type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <classname type="string">Oval</classname>
+                        <data type="list">
+                            <_float type="float">8</_float>
+                        </data>
+                    </_dict>
+                </performed>
+                <inverse type="list" />
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-09-10 00:12:42</date>
+            </stamp>
+            <annotations type="dict" />
+            <parent type="string">1933c728-75d2-451c-863f-e8732cbb62f4</parent>
+        </version>
+        <version type="dict">
+            <id type="string">1933c728-75d2-451c-863f-e8732cbb62f4</id>
+            <actions type="dict">
+                <checkpoint type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <classname type="string">Oval</classname>
+                        <data type="list">
+                            <_float type="float">5</_float>
+                        </data>
+                    </_dict>
+                    <_dict type="dict">
+                        <classname type="string">Rectangle</classname>
+                        <data type="list">
+                            <_dict type="dict">
+                                <height type="float">4</height>
+                                <width type="float">3</width>
+                            </_dict>
+                        </data>
+                    </_dict>
+                </performed>
+                <inverse type="list" />
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-09-10 00:12:42</date>
+            </stamp>
+            <annotations type="dict" />
+            <parent type="string">00000000-0000-0000-0000-000000000000</parent>
+        </version>
+        <version type="dict">
+            <id type="string">32885513-9fa8-479f-bbcd-e7de14b91611</id>
+            <actions type="dict">
+                <checkpoint type="list" />
+                <performed type="list">
+                    <_dict type="dict">
+                        <classname type="string">Oval</classname>
+                        <data type="list">
+                            <_float type="float">8</_float>
+                        </data>
+                    </_dict>
+                </performed>
+                <inverse type="list" />
+            </actions>
+            <stamp type="dict">
+                <date type="datetime">2011-09-23 01:25:18</date>
+            </stamp>
+            <annotations type="dict" />
+            <parent type="string">b19e2bec-a1f2-406c-b9ad-751f19f285a3</parent>
+        </version>
+    </versions>
+    <annotations type="dict" />
+</vistrail>
