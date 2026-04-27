@@ -35,17 +35,26 @@ set(SRC_SWIG_INTERFACES
 
 add_definitions(-DTIXML_USE_STL -D_FILE_OFSET_BITS=64)
 
+# Set CMake policies for modern SWIG usage
+cmake_policy(SET CMP0078 NEW)  # UseSWIG generates standard target names
+cmake_policy(SET CMP0086 NEW)  # UseSWIG honors SWIG_MODULE_NAME
+
 find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
 set_source_files_properties(${SRC_SWIG_INTERFACE} PROPERTIES CPLUSPLUS ON)
 SET_SOURCE_FILES_PROPERTIES(${SRC_SWIG_INTERFACE} PROPERTIES SWIG_FLAGS "-includeall")
 set(CMAKE_SWIG_FLAGS "-c++")
+
 if (VisTrails_PYTHON_WRAPPING)
-   find_package(PythonLibs)
-   include_directories(${PYTHON_INCLUDE_PATH} ${CMAKE_CURRENT_SOURCE_DIR})
-   
-   swig_add_module(PyVisTrails python ${SRC_SWIG_INTERFACE} ${SRC_SWIG_PYTHON_CXX})
-   swig_link_libraries(PyVisTrails ${PYTHON_LIBRARIES} VisTrails)
+   find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+   include_directories(${Python3_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR})
+
+   set_property(SOURCE ${SRC_SWIG_INTERFACE} PROPERTY USE_TARGET_INCLUDE_DIRECTORIES TRUE)
+   swig_add_library(PyVisTrails
+      TYPE MODULE
+      LANGUAGE python
+      SOURCES ${SRC_SWIG_INTERFACE} ${SRC_SWIG_PYTHON_CXX})
+   target_link_libraries(PyVisTrails PRIVATE ${Python3_LIBRARIES} VisTrails)
 endif (VisTrails_PYTHON_WRAPPING)
 
 if (VisTrails_JAVA_WRAPPING)
