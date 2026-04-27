@@ -11,7 +11,7 @@
 #define IMAGEVIEWER_HPP
 
 #include <QWidget>
-#include <QtGui>
+#include <QGraphicsScene>
 
 namespace Ui {
     class imageViewer;

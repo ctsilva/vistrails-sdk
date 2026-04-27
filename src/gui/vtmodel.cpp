@@ -7,7 +7,6 @@
  * License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
  */
 
-#include <QtGui>
 #include <QVariant>
 
 #include "vtnode.hpp"
@@ -53,7 +52,7 @@ QVariant VtModel::data(const QModelIndex &index, int role) const
 Qt::ItemFlags VtModel::flags(const QModelIndex &index) const
 {
   if (!index.isValid())
-    return 0;
+    return {};
 
   return Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }

@@ -10,6 +10,7 @@
 #include <QStringList>
 #include <QIcon>
 #include <QDateTime>
+#include <QTimeZone>
 #include <QVariant>
 
 #include "vtnode.hpp"
@@ -116,8 +117,8 @@ QVariant VtNode::getThumbnail() const
 QVariant VtNode::getDate() const
 {
   time_t t = version->stamp()->get("date")->asDateTime()->toTime();
-  QDateTime qtime = QDateTime::fromTime_t(t);
-  qtime.setTimeSpec(Qt::UTC);
+  QDateTime qtime = QDateTime::fromSecsSinceEpoch(t);
+  qtime.setTimeZone(QTimeZone::UTC);
   return qtime.toLocalTime();
 }
 
@@ -191,8 +192,8 @@ bool VtNode::setData(int column, const QVariant &value)
 bool VtNode::setDate(const QVariant &value)
 {
   QDateTime qtime = QDateTime::fromString(value.toString(), "yyyy-M-d hh:mm:ss ap");
-  qtime.setTimeSpec(Qt::LocalTime);
-  version->stamp()->setDateTime("date", qtime.toUTC().toTime_t());
+  qtime.setTimeZone(QTimeZone::LocalTime);
+  version->stamp()->setDateTime("date", qtime.toUTC().toSecsSinceEpoch());
   return true;
 }
 

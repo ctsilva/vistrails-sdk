@@ -20,7 +20,7 @@ CustomLabel::CustomLabel(QWidget *parent)
 {
     QHBoxLayout *horizontalLayout = new QHBoxLayout(this);
     imageInstance = new ImageHolder(this);
-    horizontalLayout->setMargin(0);
+    horizontalLayout->setContentsMargins(0, 0, 0, 0);
     horizontalLayout->addWidget(imageInstance);
 }
 

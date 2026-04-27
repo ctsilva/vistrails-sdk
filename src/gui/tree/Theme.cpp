@@ -8,6 +8,8 @@
  */
 
 #include "Theme.h"
+#include <QIcon>
+#include <QPolygon>
 
 DefaultTheme *ThemeHolder::theme = NULL;
 

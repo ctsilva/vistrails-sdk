@@ -9,12 +9,18 @@
 
 #include "CommonWidgets.h"
 #include "Theme.h"
+#include <QPainter>
+#include <QLayout>
+#include <QFileDialog>
+#include <QKeyEvent>
+#include <QActionGroup>
+#include <QMenu>
 
 //////////////////////////////////////////////////////////////////////////////
 QToolWindow::QToolWindow(QWidget *widget, QWidget *parent)
 : QDockWidget(parent)
 {
-  this->setFeatures(QDockWidget::AllDockWidgetFeatures);
+  this->setFeatures(QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
   this->setWidget(widget);
   if(widget)
     this->setWindowTitle(widget->windowTitle());
@@ -149,7 +155,7 @@ QSearchTreeWindow::QSearchTreeWindow(QWidget *parent)
   this->setWindowTitle("Search Tree");
 
   this->vLayout = new QVBoxLayout(this);
-  this->vLayout->setMargin(0);
+  this->vLayout->setContentsMargins(0, 0, 0, 0);
   this->vLayout->setSpacing(0);
   this->setLayout(vLayout);
 
@@ -244,7 +250,7 @@ void QPromptWidget::paintEvent(QPaintEvent *e)
 QStringEdit::QStringEdit(QWidget *parent): QFrame(parent)
 {
   this->hLayout = new QHBoxLayout(this);
-  this->hLayout->setMargin(0);
+  this->hLayout->setContentsMargins(0, 0, 0, 0);
   this->hLayout->setSpacing(0);
   this->setLayout(hLayout);
 
@@ -354,9 +360,9 @@ QSearchEditBox::QSearchEditBox(QWidget *parent): QComboBox(parent)
   this->setEditable(true);
   this->setInsertPolicy(QComboBox::InsertAtTop);
   this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-  QRegExp regexp = QRegExp("\\S.*");
+  QRegularExpression regexp = QRegularExpression("\\S.*");
   this->setDuplicatesEnabled(false);
-  this->validator = new QRegExpValidator(regexp, this);
+  this->validator = new QRegularExpressionValidator(regexp, this);
   this->setValidator(validator);
   this->addItem("Clear Recent Searches");
 
@@ -388,7 +394,7 @@ QSearchBox::QSearchBox(bool refine, QWidget *parent): QWidget(parent)
   this->setWindowTitle("Search");
 
   hLayout = new QHBoxLayout(this);
-  this->hLayout->setMargin(0);
+  this->hLayout->setContentsMargins(0, 0, 0, 0);
   this->hLayout->setSpacing(2);
   this->setLayout(hLayout);
 

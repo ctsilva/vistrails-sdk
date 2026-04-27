@@ -11,9 +11,12 @@
 #include "vtwindow.hpp"
 #include "Theme.h"
 #include <QGraphicsItem>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsSceneContextMenuEvent>
 #include <QColor>
 #include <QMimeData>
 #include <QDrag>
+#include <QTimer>
 
 const static double ZOOM_THRESH = 350.0;
 
@@ -336,9 +339,9 @@ void QGraphicsVersionTextItem::focusOutEvent(QFocusEvent *e)
 // QGraphicsVersionItem methods
 int QGraphicsVersionItem::max_rank = 0;
 
-QGraphicsVersionItem::QGraphicsVersionItem(QGraphicsItem *parent, 
+QGraphicsVersionItem::QGraphicsVersionItem(QGraphicsItem *parent,
                                            QVersionTreeScene *scene)
-                                           : QGraphicsEllipseItem(parent, scene)
+                                           : QGraphicsEllipseItem(parent)
 {
   this->mimeData = new QMimeData();
   this->treeScene = scene;
@@ -429,7 +432,7 @@ void QGraphicsVersionItem::update_color(bool isThisUs, int new_rank,
     else
       setBrush(ThemeHolder::getCurrentTheme()->VERSION_OTHER_BRUSH);
     float sat = (float)(new_rank+1) / new_max_rank;
-    qreal h,s,v,a;
+    float h,s,v,a;
     brush().color().getHsvF(&h, &s, &v, &a);
     this->versionBrush = 
       QBrush(QColor::fromHsvF(h, s*sat, v+(1.0-v)*(1-sat), a));
@@ -440,7 +443,7 @@ void QGraphicsVersionItem::updateColor()
 {
   setBrush(ThemeHolder::getCurrentTheme()->VERSION_USER_BRUSH);
   float sat = (float)this->rank / QGraphicsVersionItem::max_rank;
-  qreal h,s,v,a;
+  float h,s,v,a;
   brush().color().getHsvF(&h, &s, &v, &a);
   this->versionBrush = 
     QBrush(QColor::fromHsvF(h, s*sat, v+(1.0-v)*(1-sat), a));
@@ -454,7 +457,7 @@ void QGraphicsVersionItem::setSaturation(bool isThisUser, float sat)
       setBrush(ThemeHolder::getCurrentTheme()->VERSION_USER_BRUSH);
     else
       setBrush(ThemeHolder::getCurrentTheme()->VERSION_OTHER_BRUSH);
-    qreal h,s,v,a;
+    float h,s,v,a;
     brush().color().getHsvF(&h, &s, &v, &a);
     this->versionBrush = 
       QBrush(QColor::fromHsvF(h, s*sat, v+(1.0-v)*(1-sat), a));
@@ -468,7 +471,7 @@ void QGraphicsVersionItem::updateWidthFromLabel()
 
 void QGraphicsVersionItem::updateWidthFromLabel(const QString &lbl)
 {
-  this->width = this->versionFontMetrics->width(lbl)+40;
+  this->width = this->versionFontMetrics->horizontalAdvance(lbl)+40;
   this->height = this->versionFontMetrics->height()+25;
 
   if(this->width < 80)
@@ -717,7 +720,7 @@ void QGraphicsVersionItem::startDrag()
   QDrag _drag(this->scene()->views()[0]);
   _drag.setMimeData(mimeData);
   _drag.setPixmap(ThemeHolder::getCurrentTheme()->VERSION_DRAG_PIXMAP);
-  _drag.start();
+  _drag.exec();
 }
 
 void QGraphicsVersionItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)

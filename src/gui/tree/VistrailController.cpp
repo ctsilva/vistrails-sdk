@@ -400,8 +400,8 @@ void VistrailController::filterDate(QDateTime from,
 {
   from.setTimeSpec(Qt::LocalTime);
   to.setTimeSpec(Qt::LocalTime);
-  time_t from_t = from.toUTC().toTime_t();
-  time_t to_t = to.toUTC().toTime_t();
+  time_t from_t = from.toUTC().toSecsSinceEpoch();
+  time_t to_t = to.toUTC().toSecsSinceEpoch();
 
   vt::Vistrail *vistrail = this->sessionFocus->session()->vistrail();
   vt::VersionTree *fullTree = vistrail->versionTree();

@@ -19,8 +19,16 @@
 #ifndef __VERSIONPROP_H__
 #define __VERSIONPROP_H__
 
-#include <QtGui>
-#include <QtCore>
+#include <QWidget>
+#include <QLabel>
+#include <QLineEdit>
+#include <QTextEdit>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QDialog>
+#include <QDateTime>
+#include <QComboBox>
 #include "VistrailController.h"
 #include "CommonWidgets.h"
 

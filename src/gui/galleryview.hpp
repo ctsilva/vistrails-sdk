@@ -11,7 +11,11 @@
 #define GALLERYVIEW_HPP
 
 #include <QGraphicsView>
-#include <QtGui>
+#include <QGraphicsScene>
+#include <QImage>
+#include <QFutureWatcher>
+#include <QMouseEvent>
+#include <QWheelEvent>
 
 struct ScaledImageInfo
 {

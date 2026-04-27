@@ -9,8 +9,13 @@
 
 #include "vtwindow.hpp"
 
-#include <QtGui>
-#include <QtCore>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QSettings>
+#include <QTimer>
+#include <QActionGroup>
+#include <QScrollBar>
+#include <QTimeZone>
 #include "ui_vistrailsui.h"
 #include "ui_about.h"
 #include "preferencesdialog.hpp"
@@ -160,7 +165,7 @@ void VisTrailsWindow::initTableView()
   ui->tbView->setIconSize(QSize(thumbnailLength(),thumbnailLength()));
   ui->tbView->verticalHeader()->setDefaultSectionSize(thumbnailLength());
   ui->tbView->verticalHeader()->setVisible(false);
-  ui->tbView->horizontalHeader()->setResizeMode(0, QHeaderView::Fixed);
+  ui->tbView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
   ui->tbView->horizontalHeader()->resizeSection(0, thumbnailLength()+10);
   ui->tbView->setItemDelegate(new TableDelegate());
 }
@@ -536,8 +541,8 @@ void VisTrailsWindow::updateInfoView()
       ui->versionUser->setText(usr);
 
       time_t timet = version->stamp()->get("date")->asDateTime()->toTime();
-      QDateTime qtime = QDateTime::fromTime_t(timet);
-      qtime.setTimeSpec(Qt::UTC);
+      QDateTime qtime = QDateTime::fromSecsSinceEpoch(timet);
+      qtime.setTimeZone(QTimeZone::UTC);
       QString time = qtime.toLocalTime().toString("yyyy-M-d hh:mm:ss ap");
       ui->versionDate->setText(time);
 
@@ -979,10 +984,10 @@ void VisTrailsWindow::itemChanged(QStandardItem *item)
     case 2:
       version->annotations()->setString("label", data.toUtf8().constData());
       break;
-    case 3: 
+    case 3:
       qtime = QDateTime::fromString(data, "yyyy-M-d hh:mm:ss ap");
-      qtime.setTimeSpec(Qt::LocalTime);
-      version->stamp()->setDateTime("date", qtime.toUTC().toTime_t());
+      qtime.setTimeZone(QTimeZone::LocalTime);
+      version->stamp()->setDateTime("date", qtime.toUTC().toSecsSinceEpoch());
       break;
     case 4:
       version->stamp()->setString("user", data.toUtf8().constData());
@@ -1014,8 +1019,8 @@ void VisTrailsWindow::versionChanged(const vt::VersionId &id)
       QString user = getVal(stamp, "user", "<unknown>");
 
       time_t timet = version->stamp()->get("date")->asDateTime()->toTime();
-      QDateTime qtime = QDateTime::fromTime_t(timet);
-      qtime.setTimeSpec(Qt::UTC);
+      QDateTime qtime = QDateTime::fromSecsSinceEpoch(timet);
+      qtime.setTimeZone(QTimeZone::UTC);
       QString time = qtime.toLocalTime().toString("yyyy-M-d hh:mm:ss ap");
       ui->versionDate->setText(time);
     

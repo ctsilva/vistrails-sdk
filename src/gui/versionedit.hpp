@@ -10,7 +10,14 @@
 #ifndef VERSIONEDIT_HPP
 #define VERSIONEDIT_HPP
 
-#include <QtGui>
+#include <QDialog>
+#include <QMenu>
+#include <QAction>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPushButton>
+#include <QShowEvent>
+#include <QCloseEvent>
 #include "VisTrails.h"
 
 class VersionEdit : public QDialog

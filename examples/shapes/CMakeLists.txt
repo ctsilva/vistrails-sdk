@@ -9,6 +9,7 @@ find_package(Boost 1.42 REQUIRED)
 
 set(VT_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 set(VT_LIB ${VT_ROOT}/build/libVisTrails.dylib)
+set(VT_GUI_LIB ${VT_ROOT}/build/gui/libVisTrailsGUI.dylib)
 
 add_definitions(-DTIXML_USE_STL -D_FILE_OFSET_BITS=64)
 
@@ -46,5 +47,6 @@ target_include_directories(Shapes PRIVATE
 
 target_link_libraries(Shapes PRIVATE
     Qt6::Widgets
+    ${VT_GUI_LIB}
     ${VT_LIB}
 )

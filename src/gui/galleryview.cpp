@@ -14,6 +14,8 @@
 
 #include <QUrl>
 #include <QFileInfo>
+#include <QScrollBar>
+#include <QtConcurrent/QtConcurrent>
 
 int mainWidth = 0;
 int mainHeight = 0;
@@ -44,7 +46,7 @@ imgGallery::imgGallery(QWidget *parent)
 
     this->setScene(&graphicsScene);
 
-    this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing | QPainter::TextAntialiasing);
+    this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
     connect(imageScaling, SIGNAL(resultReadyAt(int)), SLOT(showImageOnWall(int)));
     
 }
@@ -169,7 +171,7 @@ void imgGallery::changeZoomLevelByFactor(zoomFocus zoom)
 */
 void imgGallery::wheelEvent(QWheelEvent *e)
 {
-    int numDegrees = e->delta() / 8;
+    int numDegrees = e->angleDelta().y() / 8;
     int numSteps = numDegrees / 15;
 
     if (numSteps > 0)
@@ -193,7 +195,7 @@ void imgGallery::mousePressEvent(QMouseEvent *e)
 {
     if (e->button() == Qt::LeftButton)
     {
-        iMouseDeltaValueForPressedEvent = e->x();
+        iMouseDeltaValueForPressedEvent = e->position().x();
         bMouseButtonPressed = true;
     }
     QGraphicsView::mousePressEvent(e);
@@ -226,9 +228,9 @@ void imgGallery::mouseMoveEvent(QMouseEvent *e)
 
     if (bMouseButtonPressed)
     {
-        direction = iMouseDeltaValueForPressedEvent - e->x();
+        direction = iMouseDeltaValueForPressedEvent - e->position().x();
         this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value() + direction);
-        iMouseDeltaValueForPressedEvent = e->x();
+        iMouseDeltaValueForPressedEvent = e->position().x();
     }
 
     QGraphicsView::mouseMoveEvent(e);

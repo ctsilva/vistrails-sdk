@@ -250,6 +250,13 @@ void MainWindow::initVisTrails()
   this->Focus = new vt::SessionFocus(this->Session);
   this->Focus->addHandler(this);
 
+  // Create and show the VisTrails history tree window
+  this->vistrailsWindow = new VisTrailsWindow();
+  this->vistrailsWindow->setSessionFocus(this->Focus);
+  this->vistrailsWindow->setWindowTitle("VisTrails - Version History");
+  this->vistrailsWindow->resize(800, 600);
+  this->vistrailsWindow->show();
+
   this->addTriangle();
   this->addBox();
   this->addTriangle();

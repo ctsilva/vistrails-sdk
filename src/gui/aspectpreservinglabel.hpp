@@ -10,9 +10,9 @@
 #ifndef ASPECTPRESERVINGLABEL_HPP
 #define ASPECTPRESERVINGLABEL_HPP
 
-#include <QtGui>
 #include <QLabel>
 #include <QWidget>
+#include <QSizePolicy>
 #include <iostream>
 
 class QAspectPreservingLabel : public QLabel

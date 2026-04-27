@@ -9,8 +9,12 @@ License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
 ]]
 
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 project(VisTrailsGUI)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 set( SRC_GUI_SRCS
 #appmodel.cpp
@@ -88,12 +92,7 @@ vistrailsui.qrc
 
 #add_definitions (-Wall)
 
-find_package(Qt4 REQUIRED)
-include(${QT_USE_FILE})
-
-QT4_ADD_RESOURCES( RC_SRCS ${SRC_RC} )
-QT4_WRAP_UI( UI_HDRS ${SRC_UI} )
-QT4_WRAP_CPP( GUI_MOC_SRCS ${SRC_GUI_HDRS} ${SRC_TREE_HDRS})
+find_package(Qt6 COMPONENTS Widgets PrintSupport Concurrent REQUIRED)
 
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
@@ -102,18 +101,17 @@ include_directories(
   ${Boost_INCLUDE_DIR}
 )
 
-add_library(VisTrailsGUI SHARED 
-  ${SRC_GUI_SRCS} 
-  ${GUI_MOC_SRCS} 
-  ${UI_HDRS} 
-  ${SRC_GUI_HDRS} 
-  ${RC_SRCS} 
-  ${SRC_TREE} 
+add_library(VisTrailsGUI SHARED
+  ${SRC_GUI_SRCS}
+  ${SRC_GUI_HDRS}
+  ${SRC_UI}
+  ${SRC_RC}
+  ${SRC_TREE}
   ${SRC_TREE_HDRS}
 )
 add_dependencies(VisTrailsGUI VisTrails)
 
-target_link_libraries(VisTrailsGUI ${QT_LIBRARIES} VisTrails)
+target_link_libraries(VisTrailsGUI Qt6::Widgets Qt6::PrintSupport Qt6::Concurrent VisTrails)
 # set_target_properties(VisTrailsGUI PROPERTIES INSTALL_NAME_DIR "@loader_path")
 
 INSTALL(FILES ${SRC_GUI_HDRS} DESTINATION include/vistrails/gui)

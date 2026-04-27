@@ -13,8 +13,14 @@
 #ifndef __THEME_H___
 #define __THEME_H___
 
-#include <QtCore>
-#include <QtGui>
+#include <QColor>
+#include <QCursor>
+#include <QFont>
+#include <QFontMetrics>
+#include <QIcon>
+#include <QPen>
+#include <QBrush>
+#include <QLinearGradient>
 #include "Color.h"
 
 // This is the default theme which contains color, images,

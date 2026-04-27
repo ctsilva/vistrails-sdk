@@ -7,7 +7,8 @@
  * License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
  */
 
-#include <QtGui>
+#include <QApplication>
+#include <QMouseEvent>
 
 #include "delegate.hpp"
 #include "preferencesdialog.hpp"

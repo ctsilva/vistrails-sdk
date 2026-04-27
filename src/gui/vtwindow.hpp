@@ -11,8 +11,17 @@
 #define VISTRAILSWINDOW_HPP
 
 #include <iostream>
-#include <QtGui/QMainWindow>
-#include <QtGui>
+#include <QMainWindow>
+#include <QAction>
+#include <QMenu>
+#include <QMenuBar>
+#include <QToolBar>
+#include <QDockWidget>
+#include <QSettings>
+#include <QStackedWidget>
+#include <QListView>
+#include <QTableView>
+#include <QStandardItem>
 #include "VisTrails.h"
 #include "tree/VersionView.h"
 #include "versionedit.hpp"

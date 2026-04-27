@@ -45,7 +45,7 @@ void ImageHolder::setImagePath(const QString& path)
 */
 QPixmap ImageHolder::pixmap() const
 {
-    return QPixmap(*lblPixmapHolder->pixmap());
+    return lblPixmapHolder->pixmap();
 }
 
 /*

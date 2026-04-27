@@ -9,6 +9,9 @@
 
 #include "versionedit.hpp"
 #include "vtwindow.hpp"
+#include <QMessageBox>
+#include <QVBoxLayout>
+#include <QLabel>
 
 VersionEdit::VersionEdit(QWidget *parent)
   : QDialog(parent)

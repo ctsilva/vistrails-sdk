@@ -7,7 +7,6 @@
  * License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
  */
 
-#include <QtGui>
 #include "imageviewer.hpp"
 #include "ui_imageviewer.h"
 #include "vtwindow.hpp"

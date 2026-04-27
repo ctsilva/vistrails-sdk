@@ -17,7 +17,7 @@ class ImageProxyWidget : public QGraphicsProxyWidget
 {
     Q_OBJECT
 public:
-    ImageProxyWidget(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+    ImageProxyWidget(QGraphicsItem *parent = nullptr, Qt::WindowFlags wFlags = {});
     virtual ~ImageProxyWidget();
     QRectF boundingRect() const;
     void setDefaultItemGeometry(const QRectF &geometry);

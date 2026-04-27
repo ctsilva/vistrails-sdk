@@ -10,6 +10,9 @@
 #include "VersionProp.h"
 #include "Theme.h"
 #include "vtwindow.hpp"
+#include <QApplication>
+#include <QClipboard>
+#include <QTextDocumentFragment>
 
 //propagatingEvent = set([
 //  QtCore.QEvent.MouseButtonDblClick,
@@ -33,7 +36,7 @@ QVersionProp::QVersionProp(QWidget *parent) : QWidget(parent)
   this->setWindowTitle("Properties");
 
   this->vLayout = new QVBoxLayout();
-  vLayout->setMargin(0);
+  vLayout->setContentsMargins(0, 0, 0, 0);
   vLayout->setSpacing(5);
   this->setLayout(vLayout);
 
@@ -41,7 +44,7 @@ QVersionProp::QVersionProp(QWidget *parent) : QWidget(parent)
   vLayout->addWidget(this->searchBox);
 
   this->gLayout = new QGridLayout();
-  gLayout->setMargin(0);
+  gLayout->setContentsMargins(0, 0, 0, 0);
   gLayout->setSpacing(5);
   gLayout->setColumnMinimumWidth(1,5);
   gLayout->setRowMinimumHeight(0,24);
@@ -54,7 +57,7 @@ QVersionProp::QVersionProp(QWidget *parent) : QWidget(parent)
   gLayout->addWidget(tagLabel, 0, 0, 1, 1);
 
   this->editLayout = new QHBoxLayout();
-  editLayout->setMargin(0);
+  editLayout->setContentsMargins(0, 0, 0, 0);
   editLayout->setSpacing(2);
   this->tagEdit = new QLineEdit();
   tagLabel->setBuddy(this->tagEdit);
@@ -172,7 +175,7 @@ void QVersionProp::updateVersion(const vt::VersionId &id)
     if (version != NULL)
     { 
       time_t timet = version->stamp()->get("date")->asDateTime()->toTime();
-      QDateTime qtime = QDateTime::fromTime_t(timet);
+      QDateTime qtime = QDateTime::fromSecsSinceEpoch(timet);
       qtime.setTimeSpec(Qt::UTC);
       QString time = qtime.toLocalTime().toString("yyyy-M-d hh:mm:ss ap");
 
@@ -807,7 +810,7 @@ void QVersionPropOverlay::updateVersion(const vt::VersionId &id)
     if (version != NULL)
     { 
       time_t timet = version->stamp()->get("date")->asDateTime()->toTime();
-      QDateTime qtime = QDateTime::fromTime_t(timet);
+      QDateTime qtime = QDateTime::fromSecsSinceEpoch(timet);
       qtime.setTimeSpec(Qt::UTC);
       QString time = qtime.toLocalTime().toString("yyyy-M-d hh:mm:ss ap");
 
@@ -861,11 +864,11 @@ void QVersionPropOverlay::updateVersion(const vt::VersionId &id)
 QString QVersionPropOverlay::convertHtmlToText(QString str)
 {
   // Some text we want to ignore lives outside brackets in the header
-  str.replace(QRegExp("<head>.*</head>"), "");
+  str.replace(QRegularExpression("<head>.*</head>"), "");
   // Remove all other tags
-  str.replace(QRegExp("<[^>]*>"), "");
+  str.replace(QRegularExpression("<[^>]*>"), "");
   // Remove newlines
-  str.replace(QRegExp("\n"), " ");
+  str.replace(QRegularExpression("\n"), " ");
   return str;
 }
 
@@ -877,7 +880,7 @@ QString QVersionPropOverlay::truncate(QString str)
     str.truncate(22);
     str.append("...");
   }
-  str.replace(QRegExp("\n"), "...\n");
+  str.replace(QRegularExpression("\n"), "...\n");
   return str;
 }
 
@@ -1219,7 +1222,7 @@ QNotesDialog::QNotesDialog(QWidget *parent): QDialog(parent)
 
   this->layout = new QVBoxLayout(this);
   this->layout->addWidget(this->notes);
-  this->layout->setMargin(0);
+  this->layout->setContentsMargins(0, 0, 0, 0);
 
   this->apply_button = new QPushButton("Apply", this);
   this->apply_button->setDefault(false);

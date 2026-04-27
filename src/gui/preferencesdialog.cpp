@@ -7,7 +7,7 @@
  * License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
  */
 
-#include <QtGui>
+#include <QSettings>
 #include "preferencesdialog.hpp"
 #include "ui_preferencesdialog.h"
 #include "vtwindow.hpp"

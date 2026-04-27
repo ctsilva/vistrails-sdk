@@ -17,8 +17,18 @@
 #ifndef __GRAPHICSVIEW_H__
 #define __GRAPHICSVIEW_H__
 
-#include <QtCore>
-#include <QtGui>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QGraphicsItem>
+#include <QGraphicsRectItem>
+#include <QMouseEvent>
+#include <QWheelEvent>
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QEnterEvent>
 #include "VisTrails.h"
 
 class QPIPGraphicsView;
@@ -122,7 +132,7 @@ public:
 
   //Check the modifiers state when the mouse enter the
   //canvas. Then update the mouse functionality appropriately
-  void enterEvent(QEvent *e);
+  void enterEvent(QEnterEvent *e);
   
   //Update the cursor shape
   //
@@ -237,7 +247,7 @@ public:
   void showEvent(QShowEvent *e);
 
   // Show a larger frame when the mouse enter to facilitate
-  void enterEvent(QEvent *e);
+  void enterEvent(QEnterEvent *e);
 
   // Show a smaller frame when the mouse exit the widget to get
   // more view

@@ -13,9 +13,8 @@
 #include <QList>
 #include <QVariant>
 #include <QVector>
+#include <QIcon>
 #include <vector>
-
-class QIcon;
 namespace vt { class Version; }
 
 class VtNode

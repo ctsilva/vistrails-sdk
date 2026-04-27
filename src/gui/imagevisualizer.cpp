@@ -9,8 +9,6 @@
 
 #include "imagevisualizer.hpp"
 #include "ui_imagevisualizer.h"
-#include <QtGui>
-#include <QtCore>
 
 
 imageVisualizer::imageVisualizer(QWidget *parent) :

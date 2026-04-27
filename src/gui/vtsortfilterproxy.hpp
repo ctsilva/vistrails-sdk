@@ -9,8 +9,8 @@
 
 #ifndef VTSORTFILTERPROXY_HPP
 #define VTSORTFILTERPROXY_HPP
-#include <QtGui>
 #include <QSortFilterProxyModel>
+#include <QObject>
 
 class VtTableProxyModel;
 

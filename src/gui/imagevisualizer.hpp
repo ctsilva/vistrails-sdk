@@ -12,7 +12,9 @@
 #include "ui_imagevisualizer.h"
 
 #include <QWidget>
-#include <QtGui>
+#include <QGraphicsScene>
+#include <QPixmap>
+#include <QResizeEvent>
 
 //namespace Ui {
     // class imageVisualizer;

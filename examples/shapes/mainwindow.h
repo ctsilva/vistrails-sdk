@@ -13,12 +13,14 @@
 #include <QMainWindow>
 #include <VisTrails.h>
 #include "diagramitem.h"
+#include "gui/vtwindow.hpp"
 
 QT_BEGIN_NAMESPACE
 class QAction;
 class QMenu;
 QT_END_NAMESPACE
 class DiagramScene;
+class VisTrailsWindow;
 
 class MainWindow : public QMainWindow, public vt::HNotify
 {
@@ -75,6 +77,7 @@ private:
 
   vt::SessionFocus *Focus;
   vt::Session *Session;
+  VisTrailsWindow *vistrailsWindow;
 };
 
 #endif

@@ -11,6 +11,7 @@
 #define PREFERENCESDIALOG_HPP
 
 #include <QDialog>
+#include <QPushButton>
 
 namespace Ui {
     class PreferencesDialog;

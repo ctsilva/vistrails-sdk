@@ -9,7 +9,7 @@ License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
 ]]
 
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 project(VisTrails)
 set(VisTrails_VERSION_MAJOR 0)
 set(VisTrails_VERSION_MAJOR 1)

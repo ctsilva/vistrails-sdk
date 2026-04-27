@@ -10,7 +10,11 @@
 #ifndef DIRDELEGATE_HPP
 #define DIRDELEGATE_HPP
 
-#include <QtGui>
+#include <QStyledItemDelegate>
+#include <QStyleOptionViewItem>
+#include <QPainter>
+#include <QEvent>
+#include <QAbstractItemModel>
 #include "VisTrails.h"
 
 class ListDelegate : public QStyledItemDelegate

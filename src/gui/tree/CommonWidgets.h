@@ -10,8 +10,18 @@
 #ifndef __COMMONWIDGETS_H__
 #define __COMMONWIDGETS_H__
 
-#include <QtGui>
-#include <QtCore>
+#include <QDockWidget>
+#include <QWidget>
+#include <QLabel>
+#include <QLineEdit>
+#include <QToolButton>
+#include <QHBoxLayout>
+#include <QEvent>
+#include <QObject>
+#include <QMainWindow>
+#include <QTreeWidget>
+#include <QComboBox>
+#include <QRegularExpressionValidator>
 
 class QSearchBox;
 
@@ -213,7 +223,7 @@ signals:
   void resetText();
 
 private:
-  QRegExpValidator *validator;
+  QRegularExpressionValidator *validator;
 };
         
 //////////////////////////////////////////////////////////////////////////////

@@ -10,6 +10,12 @@
 #include "GraphicsView.h"
 #include "Theme.h"
 #include <math.h>
+#include <QScrollBar>
+#include <QApplication>
+#include <QTransform>
+#include <QEnterEvent>
+#include <QPrinter>
+#include <QPrinterInfo>
 
 //const static double log2 = log(2.0);
 
@@ -89,8 +95,8 @@ void QInteractiveGraphicsScene::fitToView(QGraphicsView *view,
   view->fitInView(this->sceneBoundingRect, Qt::KeepAspectRatio);
 
   // Set minimum scale to 0.5
-  if (view->matrix().m11() > 0.5 && view->matrix().m22() > 0.5)
-    view->scale(0.5/view->matrix().m11(), 0.5/view->matrix().m22());
+  if (view->transform().m11() > 0.5 && view->transform().m22() > 0.5)
+    view->scale(0.5/view->transform().m11(), 0.5/view->transform().m22());
 }
 
 void QInteractiveGraphicsScene::fitToAllViews(bool recompute_bounding_rect)
@@ -219,7 +225,7 @@ void QInteractiveGraphicsView::validateCursorState(
   this->setCursorState(this->findCursorState(modifiers));
 }
 
-void QInteractiveGraphicsView::enterEvent(QEvent *e)
+void QInteractiveGraphicsView::enterEvent(QEnterEvent *e)
 {
   this->validateCursorState();
   QGraphicsView::enterEvent(e);
@@ -253,7 +259,7 @@ Qt::MouseButtons QInteractiveGraphicsView::translateButton(QMouseEvent *e)
     case 0:
       return Qt::LeftButton;
     case 1:
-      return Qt::MidButton;
+      return Qt::MiddleButton;
     case 2:
       return Qt::RightButton;
     }
@@ -264,7 +270,7 @@ Qt::MouseButtons QInteractiveGraphicsView::translateButton(QMouseEvent *e)
 void QInteractiveGraphicsView::mousePressEvent(QMouseEvent *e)
 {
   QPointF scenePos = this->mapToScene(e->pos());
-  QGraphicsItem *item = this->scene()->itemAt(scenePos);
+  QGraphicsItem *item = this->scene()->itemAt(scenePos, QTransform());
   Qt::MouseButtons buttons = this->translateButton(e);
   if (buttons == Qt::LeftButton)
   {
@@ -296,7 +302,7 @@ void QInteractiveGraphicsView::mousePressEvent(QMouseEvent *e)
       this->setCursorState(2);
       this->computeScale();
     }
-    else if (buttons & Qt::MidButton)
+    else if (buttons & Qt::MiddleButton)
     {
       this->setCursorState(3);
       this->startScroll = QPoint(this->horizontalScrollBar()->value(),
@@ -348,7 +354,7 @@ void QInteractiveGraphicsView::mouseMoveEvent(QMouseEvent *e)
       this->lastPos = new QPoint(globalPos.y(), globalPos.x());
     }
       
-    else if (buttons == Qt::MidButton)
+    else if (buttons == Qt::MiddleButton)
     {
       QPoint globalPos = QCursor::pos();
       
@@ -420,12 +426,12 @@ void QInteractiveGraphicsView::selectModules()
 
 void QInteractiveGraphicsView::updateMatrix()
 {
-  QMatrix matrix = QMatrix();
-  float power = ((float) this->currentScale - this->scaleMax/2) 
+  QTransform matrix = QTransform();
+  float power = ((float) this->currentScale - this->scaleMax/2)
     / this->scaleRatio;
   float scale = pow(2.0f, power);
   matrix.scale(scale, scale);
-  this->setMatrix(matrix);
+  this->setTransform(matrix);
 }
 
 inline double mylog2(double n)
@@ -435,7 +441,7 @@ inline double mylog2(double n)
 
 void QInteractiveGraphicsView::computeScale()
 {
-  this->currentScale = mylog2(this->matrix().m11()) * 
+  this->currentScale = mylog2(this->transform().m11()) *
     this->scaleRatio + this->scaleMax/2;
 }
 
@@ -503,20 +509,20 @@ QSize QInteractiveGraphicsView::sizeHint()
 
 void QInteractiveGraphicsView::zoomIn()
 {
-  QWheelEvent e(QPoint(), 120, Qt::NoButton, Qt::NoModifier);
+  QWheelEvent e(QPointF(), QPointF(), QPoint(), QPoint(0, 120), Qt::NoButton, Qt::NoModifier, Qt::NoScrollPhase, false);
   this->wheelEvent(&e);
 }
 
 void QInteractiveGraphicsView::zoomOut()
 {
-  QWheelEvent e(QPoint(), -120, Qt::NoButton, Qt::NoModifier);
+  QWheelEvent e(QPointF(), QPointF(), QPoint(), QPoint(0, -120), Qt::NoButton, Qt::NoModifier, Qt::NoScrollPhase, false);
   this->wheelEvent(&e);
 }
 
-void QInteractiveGraphicsView::wheelEvent(QWheelEvent *e) 
+void QInteractiveGraphicsView::wheelEvent(QWheelEvent *e)
 {
   this->computeScale();
-  this->currentScale += e->delta()/5.0;
+  this->currentScale += e->angleDelta().y()/5.0;
   if (this->currentScale < 0)
     this->currentScale = 0;
   if (this->currentScale > this->scaleMax)
@@ -560,8 +566,8 @@ QPIPGraphicsView::QPIPGraphicsView(QWidget *parent)
   this->setPalette(pallete);
   this->hBoxLayout = new QHBoxLayout(this);
   this->setLayout(this->hBoxLayout);
-  this->layout()->setMargin(
-    ThemeHolder::getCurrentTheme()->PIP_OUT_FRAME_WIDTH);
+  int margin = ThemeHolder::getCurrentTheme()->PIP_OUT_FRAME_WIDTH;
+  this->layout()->setContentsMargins(margin, margin, margin, margin);
   this->graphicsView = new QInteractiveGraphicsView();
   this->layout()->addWidget(this->graphicsView);
   this->firstShow = true;
@@ -716,15 +722,16 @@ void QPIPGraphicsView::showEvent(QShowEvent *e)
   QWidget::showEvent(e);
 }
 
-void QPIPGraphicsView::enterEvent(QEvent *e)
+void QPIPGraphicsView::enterEvent(QEnterEvent *e)
 {
-  this->layout()->setMargin(
-    ThemeHolder::getCurrentTheme()->PIP_IN_FRAME_WIDTH);
+  int margin = ThemeHolder::getCurrentTheme()->PIP_IN_FRAME_WIDTH;
+  this->layout()->setContentsMargins(margin, margin, margin, margin);
 }
 
 void QPIPGraphicsView::leaveEvent(QEvent *e)
 {
-  this->layout()->setMargin(ThemeHolder::getCurrentTheme()->PIP_OUT_FRAME_WIDTH);
+  int margin = ThemeHolder::getCurrentTheme()->PIP_OUT_FRAME_WIDTH;
+  this->layout()->setContentsMargins(margin, margin, margin, margin);
 }
 
 //--------------------------------------------------------------------------
