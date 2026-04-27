@@ -106,8 +106,10 @@ MoveAction::MoveAction(DiagramItem * movedItem, const QPointF & position) : \
 void MoveAction::execute(DiagramScene *scene)
 {
   DiagramItem * item = scene->getDiagramItem(data->db_get_itemId());
-  item->setPos(QPointF(data->db_get_newPosX(), data->db_get_newPosY()));
-  scene->update();
+  if (item != nullptr) {
+    item->setPos(QPointF(data->db_get_newPosX(), data->db_get_newPosY()));
+    scene->update();
+  }
 }
 
 DeleteAction::DeleteAction() : DiagramAction() 

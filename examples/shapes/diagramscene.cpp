@@ -26,9 +26,11 @@ void DiagramScene::addDiagramItem(DiagramItem *item)
 
 void DiagramScene::removeDiagramItem(int id)
 {
-  DiagramItem *item = this->itemMap[id];
-  this->itemMap.remove(id);
-  this->removeItem(item);
+  if (this->itemMap.contains(id)) {
+    DiagramItem *item = this->itemMap[id];
+    this->itemMap.remove(id);
+    this->removeItem(item);
+  }
 }
 
 DiagramItem* DiagramScene::getDiagramItem(int id)
