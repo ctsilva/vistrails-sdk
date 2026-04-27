@@ -47,10 +47,10 @@ AddAction::AddAction(DiagramItem::DiagramType addType, QPointF pos,
   std::string type = "com.vistrails.provexp.example.addaction";
   data = new uf::DBAddAction();
   
-  if (color==Qt::transparent)
-    color = QColor(static_cast<int>(qrand()) % 256,
-		   static_cast<int>(qrand()) % 256,
-		   static_cast<int>(qrand()) % 256);
+  if (color==Qt::transparent) {
+    auto *rng = QRandomGenerator::global();
+    color = QColor(rng->bounded(256), rng->bounded(256), rng->bounded(256));
+  }
   color.getRgb(&r, &g, &b);
   printf("RGB FIRST %d %d %d\n", r,g,b);
   data->db_set_r(r);

@@ -7,15 +7,17 @@
  * License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
  */
 
-#include <QtGui>
+#include <QBrush>
+#include <QRandomGenerator>
 
 #include "diagramitem.h"
 #include "diagramscene.h"
 
 DiagramItem::DiagramItem(DiagramType diagramType, QGraphicsItem *item,
                          QGraphicsScene *scene, QColor color)
-    : QGraphicsPolygonItem(item, scene)
+    : QGraphicsPolygonItem(item)
 {
+    (void)scene;
     if (diagramType == Box) {
         boxPolygon << QPointF(0, 0) 
 		   << QPointF(0, DIAGRAM_ITEM_SCALE) 
@@ -31,10 +33,10 @@ DiagramItem::DiagramItem(DiagramType diagramType, QGraphicsItem *item,
         setPolygon(trianglePolygon);
     }
 
-    if (color==Qt::transparent)
-      color = QColor(static_cast<int>(qrand()) % 256,
-                     static_cast<int>(qrand()) % 256,
-                     static_cast<int>(qrand()) % 256);
+    if (color==Qt::transparent) {
+      auto *rng = QRandomGenerator::global();
+      color = QColor(rng->bounded(256), rng->bounded(256), rng->bounded(256));
+    }
     QBrush brush(color);
     setBrush(brush);
     setFlag(QGraphicsItem::ItemIsSelectable);

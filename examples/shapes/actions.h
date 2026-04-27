@@ -7,8 +7,9 @@
  * License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
  */
 
-#include <QtGui>
-//#include "VisTrails.h"
+#include <QColor>
+#include <QPointF>
+#include <QRandomGenerator>
 
 #include "core/Action.h"
 #include "core/Handler.h"
@@ -16,7 +17,6 @@
 #include "tinyxml/tinyxml.h"
 #include "diagramscene.h"
 #include "diagramitem.h"
-#include "commands.h"
 #include <iostream>
 #include <vector>
 

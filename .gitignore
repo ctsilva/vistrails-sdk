@@ -1,0 +1,14 @@
+build/
+build_py/
+examples/*/build/
+__pycache__/
+*.pyc
+*.pyo
+
+# Built example binaries
+examples/simple/Simple
+
+# Generated example outputs
+examples/python/vtdemo_out.xml
+examples/python/simple/test_vt_out.xml
+examples/python/nativexml/test_vt_out.xml

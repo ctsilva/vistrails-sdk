@@ -9,7 +9,7 @@
 #
 
 
-from xml.etree import cElementTree as ET
+from xml.etree import ElementTree as ET
 import PyVisTrails
 from PyVisTrails import Action as _Action, ActionCreator as _ActionCreator, \
     ActionFactory as _ActionFactory, \
@@ -146,7 +146,7 @@ class XmlStorage(Storage):
                 tag_name = "_list"
             elt = ET.Element(tag_name)
             elt.set("type", "list")
-            for i in xrange(prop.asList().count()):
+            for i in range(prop.asList().count()):
                 self.set_xml_element(prop.asList().get(i), "", elt)
         elif prop.type() == PyVisTrails.PROPERTY_DICTIONARY:
             if not tag_name:
@@ -239,7 +239,7 @@ class XmlStorage(Storage):
             # go through all child elements here
             idx = 0
             new_child_props = []
-            for child_elt in elt.getchildren():
+            for child_elt in list(elt):
                 child_prop = None
                 if idx < prop.asList().count():
                     child_prop = prop.asList().get(idx)
@@ -254,7 +254,7 @@ class XmlStorage(Storage):
                 assert(prop.type() == PyVisTrails.PROPERTY_DICTIONARY)
             else:
                 prop = PDict()
-            for child_elt in elt.getchildren():
+            for child_elt in list(elt):
                 child_prop = prop.asDict().get(child_elt.tag)
                 child_prop = self.get_xml_element(child_elt, child_prop)
                 child_prop.thisown = False
@@ -284,8 +284,8 @@ class XmlStorage(Storage):
 
     def loadVersion(self, id, parent, stamp, annotations, actions):
         if self._current_version_iter is None:
-            self._current_version_iter = self._doc.getiterator("version").__iter__()
-        elt = self._current_version_iter.next()
+            self._current_version_iter = iter(self._doc.iter("version"))
+        elt = next(self._current_version_iter)
         version_dict = PDict()
         version_dict.set("stamp", stamp)
         version_dict.set("annotations", annotations)

@@ -7,7 +7,7 @@
  * License: 3-clause BSD, see https://opensource.org/licenses/BSD-3-Clause
  */
 
-#include <QtGui>
+#include <QGraphicsSceneMouseEvent>
 
 #include "diagramscene.h"
 #include "diagramitem.h"
@@ -38,9 +38,8 @@ DiagramItem* DiagramScene::getDiagramItem(int id)
 
 void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-  QPointF mousePos(event->buttonDownScenePos(Qt::LeftButton).x(),
-                   event->buttonDownScenePos(Qt::LeftButton).y());
-  movingItem = itemAt(mousePos.x(), mousePos.y());
+  QPointF mousePos = event->buttonDownScenePos(Qt::LeftButton);
+  movingItem = itemAt(mousePos, QTransform());
 
   if (movingItem != 0 && event->button() == Qt::LeftButton) {
     oldPos = movingItem->pos();

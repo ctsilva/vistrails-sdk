@@ -9,117 +9,149 @@
 #
 
 
-import vistrails
+from PyVisTrails import (
+    Action as _Action,
+    ActionCreator as _ActionCreator,
+    ActionFactory as _ActionFactory,
+    Version, Session, SessionFocus, XmlStorage,
+)
 
-class PyActionProxy(vistrails.PyActionProxy):
-    def __init__(self):
-        vistrails.PyActionProxy.__init__(self)
-        self.set_create_cb(getattr(self, 'createObject'))
 
-    def createObject(self):
-        return self._klass()
+class Action(_Action):
+    _action_id = None
 
-class PyAction(vistrails.PyAction):
-    def __init__(self, my_type, my_version, my_function="normal"):
-        vistrails.PyAction.__init__(self, my_type, my_version, my_function)
-        if hasattr(self, 'serialize'):
-            self.set_serialize_cb(getattr(self, 'serialize'))
-        if hasattr(self, 'deserialize'):
-            self.set_deserialize_cb(getattr(self, 'deserialize'))
+    def classname(self):
+        if self._action_id is None:
+            raise Exception("Action subclass must set _action_id")
+        return self._action_id
 
     @classmethod
-    def createProxy(klass):
-        new_klass = type(klass.__name__ + "Proxy", (PyActionProxy,), 
-                         {'_klass': klass})
-        # print "new_klass:", new_klass.__name__
-        return new_klass()
-            
-class RectAction(PyAction):
-    def __init__(self, function="normal"):
-        PyAction.__init__(self, "com.vistrails.provexp.example.rectaction",
-                          "0.1", function)
-        self.a_var = "rect"
-        self.elt = None
-    def serialize(self, s_type):
-        print "SERIALIZING", s_type, self.a_var
-        self.elt = vistrails.TiXmlElement("rect")
-        vistrails.create_xml_stream(self, "default", 1, self.elt)
-    def deserialize(self):
-        print "DESERIALIZING", self.a_var
+    def creator(cls):
+        return ActionFactory.globalFactory().registerAction(cls)
 
-class OvalAction(PyAction):
-    def __init__(self, function="normal"):
-        PyAction.__init__(self, "com.vistrails.provexp.example.ovalaction",
-                          "0.1", function)
-        self.a_var = "oval"
-        self.elt = None
-    def serialize(self, s_type):
-        print "SERIALIZING", s_type, self.a_var
-        self.elt = vistrails.TiXmlElement("oval")
-        vistrails.create_xml_stream(self, "default", 1, self.elt)
-    def deserialize(self):
-        print "DESERIALIZING", self.a_var
+    def load(self, plist):
+        raise Exception("Action subclass must define load method")
 
-class RectActionInverse(RectAction):
+    def save(self, plist):
+        raise Exception("Action subclass must define save method")
+
+
+class ActionCreator(_ActionCreator):
+    def __init__(self, klass):
+        _ActionCreator.__init__(self)
+        self._klass = klass
+        self._actions = []
+
+    def createAction(self):
+        action = self._klass()
+        self._actions.append(action)
+        return action
+
+    def actionId(self):
+        return self._klass._action_id
+
+
+class ActionFactory(object):
+    _instance = None
+
     def __init__(self):
-        RectAction.__init__(self, "inverse")
+        self._inner_factory = _ActionFactory.globalFactory()
+        self._creators = {}
 
-class OvalActionInverse(OvalAction):
-    def __init__(self):
-        OvalAction.__init__(self, "inverse")
+    def registerAction(self, action_klass):
+        if action_klass not in self._creators:
+            creator = ActionCreator(action_klass)
+            self._creators[action_klass] = creator
+            self._inner_factory.registerAction(creator)
+        return self._creators[action_klass]
 
-class RectActionCheckpoint(RectAction):
-    def __init__(self):
-        RectAction.__init__(self, "checkpoint")
-    
-class OvalActionCheckpoint(OvalAction):
-    def __init__(self):
-        OvalAction.__init__(self, "checkpoint")
+    @staticmethod
+    def globalFactory():
+        if ActionFactory._instance is None:
+            ActionFactory._instance = ActionFactory()
+        return ActionFactory._instance
 
-def run(vt_changed_cb=None):
-    vistrails.py_initialize(vt_changed_cb)
-    session = vistrails.Session()
-    session.setUser("dakoop@gmail.com")
-    print "user:", session.getUser()
-    focus = vistrails.SessionFocus(session)
-    print "starting createProxy"
-    vistrails.set_data_proxy(OvalAction.createProxy(),
-                             "com.vistrails.provexp.example.ovalaction")
-    vistrails.set_data_proxy(RectAction.createProxy(),
-                             "com.vistrails.provexp.example.rectaction")
-    vistrails.set_data_proxy(OvalActionInverse.createProxy(),
-                             "com.vistrails.provexp.example.ovalinverse")
-    print "done createProxy()"
 
-    focus.record(OvalAction())
-    focus.record(RectAction())
+class RectAction(Action):
+    _action_id = "com.vistrails.provexp.example.rectaction"
+
+    def __init__(self, width=0.0, height=0.0):
+        Action.__init__(self)
+        self.width = width
+        self.height = height
+
+    def load(self, plist):
+        print("DESERIALIZING rect")
+        self.width = plist.get(0).asFloat()
+        self.height = plist.get(1).asFloat()
+
+    def save(self, plist):
+        print("SERIALIZING rect", self.width, self.height)
+        plist.addFloat(self.width)
+        plist.addFloat(self.height)
+
+
+class OvalAction(Action):
+    _action_id = "com.vistrails.provexp.example.ovalaction"
+
+    def __init__(self, radius=0.0):
+        Action.__init__(self)
+        self.radius = radius
+
+    def load(self, plist):
+        print("DESERIALIZING oval")
+        self.radius = plist.get(0).asFloat()
+
+    def save(self, plist):
+        print("SERIALIZING oval", self.radius)
+        plist.addFloat(self.radius)
+
+
+def run():
+    factory = ActionFactory.globalFactory()
+    factory.registerAction(OvalAction)
+    factory.registerAction(RectAction)
+
+    session = Session()
+    focus = SessionFocus(session)
+    print("starting createProxy")
+    print("done createProxy()")
+
+    # Hold Python references so the C++ side doesn't see freed actions.
+    keep_alive = []
+
+    def hold(action):
+        keep_alive.append(action)
+        return action
+
+    # First version: oval
+    v1 = Version()
+    v1.performed().add(hold(OvalAction(2.0)))
+    focus.record(v1)
+
+    # Second version (child of v1): rect
+    v2 = Version()
+    v2.performed().add(hold(RectAction(3.0, 4.0)))
+    focus.record(v2)
+
+    # Branch back to v1, then add oval
     focus.selectParent()
-    focus.record(OvalAction())
-    focus.record(RectAction(), RectActionInverse())
+    v3 = Version()
+    v3.performed().add(hold(OvalAction(5.5)))
+    focus.record(v3)
 
-    storage = vistrails.XMLStorage("vtdemo.xml")
-    session.bind(storage)
-    session.update()
-    print 'focus currentVersion:', focus.getCurrentVersion()
-    print 'session updated id:', session.getUpdatedId(focus.getCurrentVersion())
-    focus.selectVersion(session.getUpdatedId(focus.getCurrentVersion()))
+    # Branch with inverse: a rect with an inverse rect on undo
+    v4 = Version()
+    v4.performed().add(hold(RectAction(7.0, 8.0)))
+    v4.inverse().add(hold(RectAction(7.0, 8.0)))
+    focus.record(v4)
 
-    storage_out = vistrails.XMLStorage("vtdemo_out.xml")
-    storage_out.save(session.getVistrail())
+    print("focus currentVersion:", focus.currentVersion())
 
-    # tree = session.getVistrail().getVersionTree()
-    # version_ids = ["00000000-0000-0000-0000-000000000000"]
-    # while len(version_ids) > 0:
-    #     version_id = version_ids.pop(0)
-    #     version = tree.getVersion(version_id)
-    #     if version != None:
-    #         print version.getId(), version.getParent(), version.getUser(), version.getDate()
-    #     child_id = tree.getFirstChild(version_id)
-    #     while child_id != "":
-    #         version_ids.append(child_id)
-    #         child_id = tree.getNextSibling(child_id)
-    # print 'tree id:', id(tree)
-    return (session, focus)
+    storage_out = XmlStorage("vtdemo_out.xml")
+    session.save(storage_out)
+    return (session, focus, keep_alive)
+
 
 if __name__ == '__main__':
     run()

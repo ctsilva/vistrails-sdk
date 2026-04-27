@@ -13,20 +13,13 @@
 #include <QMainWindow>
 #include <VisTrails.h>
 #include "diagramitem.h"
-#include "gui/vtwindow.hpp"
 
 QT_BEGIN_NAMESPACE
 class QAction;
-class QToolBar;
 class QMenu;
-class QUndoStack;
-class QUndoView;
-class QGraphicsView;
 QT_END_NAMESPACE
-class VersionScene;
 class DiagramScene;
 
-//! [0]
 class MainWindow : public QMainWindow, public vt::HNotify
 {
   Q_OBJECT
@@ -39,16 +32,11 @@ class MainWindow : public QMainWindow, public vt::HNotify
   void vistrailChanged();
   void versionChanged(const vt::VersionId &id);
   void versionAdded(vt::Version *version);
-  void versionSelected(const vt::VersionId &previous, 
-		       const vt::VersionId &current);
-
-  void loadFile(const char * filename);
-  void saveFile(const char * filename);
-  void newFile();
+  void versionSelected(const vt::VersionId &previous,
+                       const vt::VersionId &current);
 
 public slots:
   void itemMoved(DiagramItem *movedDiagram, const QPointF &moveStartPosition);
-  //void newVersionSelected(vt::ActionPath * path);
 
 private slots:
   void deleteItem();
@@ -59,14 +47,12 @@ private slots:
   void about();
   void itemMenuAboutToShow();
   void itemMenuAboutToHide();
-  //void indexChanged(int);
-  //void openFile();
-  //void saveFile();
+  void openFile();
+  void saveFile();
 
 private:
   void createActions();
   void createMenus();
-  void createUndoView();
   void initVisTrails();
   void addItem(DiagramItem::DiagramType itemType, bool make_checkpoint);
 
@@ -75,8 +61,6 @@ private:
   QAction *addTriangleAction;
   QAction *chkptBoxAction;
   QAction *chkptTriangleAction;
-  QAction *undoAction;
-  QAction *redoAction;
   QAction *exitAction;
   QAction *aboutAction;
   QAction *openAction;
@@ -88,19 +72,9 @@ private:
   QMenu *helpMenu;
 
   DiagramScene *diagramScene;
-  QUndoStack *undoStack;
-  QUndoView *undoView;
 
-  VisTrailsWindow *vtWindow;
   vt::SessionFocus *Focus;
   vt::Session *Session;
-  
-  int lastUndoIndex;
-  // vt::Session *session;
-  // vt::SessionFocus *focus;
-  // QGraphicsView *versionView;
-  // VersionScene *versionScene;
 };
-//! [0]
 
 #endif
