@@ -60,23 +60,28 @@ PYTHONPATH=/path/to/build/swig python examples/python/testing.py
 | Component | Status | Notes |
 |-----------|--------|-------|
 | Core Library | ✅ Complete | Builds with Qt6 and C++17 |
-| Python Bindings | ⏸️ Not Started | SWIG-based |
-| Java Bindings | ⏸️ Not Started | SWIG-based |
-| GUI Components | 🚧 In Progress | Qt6 migration underway |
-| Examples | ⏸️ Pending | Awaiting GUI completion |
-| Documentation | 📝 In Progress | See [CLAUDE.md](CLAUDE.md) |
+| GUI Library | ✅ Complete | Qt6 migration finished, all components working |
+| Shapes Example | ✅ Complete | Fully functional with version tree visualization |
+| Python Bindings | ⏸️ Not Started | SWIG-based, needs Qt6 updates |
+| Java Bindings | ⏸️ Not Started | SWIG-based, needs Qt6 updates |
+| Documentation | ✅ Complete | See [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) |
 
 ### Recent Updates
 
-- ✅ **Qt6 Migration**: Core library successfully ported to Qt6
+- ✅ **Qt6 Migration Complete**: All GUI components successfully ported to Qt6
+- ✅ **Version Tree Visualization**: Interactive history tree with zoom and navigation
+- ✅ **Shapes Example Working**: Full provenance tracking with GUI integration
 - ✅ **Modern CMake**: Updated build system to CMake 3.5+
 - ✅ **C++17**: Modernized codebase for current standards
-- 🚧 **GUI Library**: Qt6 porting in progress (see [QT6_MIGRATION.md](QT6_MIGRATION.md))
+- ✅ **Comprehensive Documentation**: Added DEVELOPER_GUIDE.md, QT6_MIGRATION.md, STATUS.md
 
 ## Documentation
 
-- **[CLAUDE.md](CLAUDE.md)** - Project architecture and developer guide
-- **[QT6_MIGRATION.md](QT6_MIGRATION.md)** - Qt6 porting guide and API changes
+- **[README.md](README.md)** - This file, project overview and quick start
+- **[DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)** - Comprehensive developer documentation
+- **[QT6_MIGRATION.md](QT6_MIGRATION.md)** - Complete Qt5→Qt6 migration guide
+- **[STATUS.md](STATUS.md)** - Detailed project status and progress tracking
+- **[CLAUDE.md](CLAUDE.md)** - Guidance for Claude Code when working with this repo
 - **[examples/](examples/)** - Working code examples demonstrating SDK usage
 
 ## Architecture Overview
