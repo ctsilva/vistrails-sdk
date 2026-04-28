@@ -18,7 +18,7 @@ The SDK enables developers to capture state transitions as provenance, providing
 | GUI Library | ✅ Complete | Qt6 migration finished, all components working |
 | Version Tree Visualization | ✅ Complete | Interactive history tree with zoom/navigation |
 | Shapes Example | ✅ Complete | Fully functional with GUI integration |
-| Python Bindings | ⏸️ Not Started | SWIG-based, needs Qt6 update |
+| Python Bindings | ✅ Complete | SWIG-based, updated for Python 3 and Qt6 |
 | Java Bindings | ⏸️ Not Started | SWIG-based, needs Qt6 update |
 | Documentation | ✅ Complete | See DEVELOPER_GUIDE.md, QT6_MIGRATION.md |
 
@@ -84,7 +84,7 @@ This opens two windows:
 - Mouse wheel on tree → zoom in/out
 - Cmd+/Cmd- → zoom keyboard shortcuts
 
-### Building with Python Wrapping (Not Yet Updated for Qt6)
+### Building with Python Wrapping
 
 ```bash
 mkdir build && cd build
@@ -92,7 +92,12 @@ cmake -DVisTrails_PYTHON_WRAPPING=ON ../src
 make
 ```
 
-**Note:** Python bindings need Qt6 updates before they will work.
+Output:
+- `libVisTrails.dylib` - Core library
+- `swig/PyVisTrails.py` - Python module
+- `swig/_PyVisTrails.so` - Python extension
+
+**Status:** ✅ Python bindings are fully working with Python 3 and Qt6.
 
 ### Building with Java Wrapping (Not Yet Updated for Qt6)
 
@@ -152,7 +157,7 @@ SWIG interface files (`.i`) wrap C++ classes for Python and Java:
 - Python: Generates `PyVisTrails` module
 - Java: Generates `com.vistrails.sdk` package + JAR file
 
-**Status:** Not yet updated for Qt6. The bindings exist but need updates to work with the modernized codebase.
+**Status:** ✅ Python bindings are fully updated for Qt6 and Python 3. Java bindings still need Qt6 updates.
 
 Custom action classes in Python/Java inherit from language-specific base classes (`PyAction`, Java action classes) and implement serialization callbacks.
 
@@ -209,9 +214,9 @@ All GUI components have been successfully migrated to Qt6. See [QT6_MIGRATION.md
   - Basic provenance recording without GUI
   - Good starting point for learning the API
 
-- [examples/python/](examples/python/) - Python binding examples ⏸️
+- [examples/python/](examples/python/) - Python binding examples ✅
   - Custom actions in Python
-  - Needs Qt6 updates
+  - Working with Python 3 and Qt6
 
 - [examples/java/](examples/java/) - Java binding examples ⏸️
   - Custom actions in Java
@@ -272,7 +277,7 @@ Expected behavior:
 
 ## Known Issues
 
-- Python/Java bindings not yet updated for Qt6
+- Java bindings not yet updated for Qt6
 - Some deprecation warnings for Qt6 API (setTimeSpec)
 - Abstract destructor warnings in shapes example (cosmetic)
 
